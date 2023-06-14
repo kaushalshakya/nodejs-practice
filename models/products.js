@@ -17,6 +17,7 @@ const getProductDetails = async() =>{
 }
 
 const getProductDetailsById = async(id) =>{
+    console.log(id);
     try{
         qb = await pool.get_connection();
         const response = await qb.select('*').where({'product_id =' : id}).get('products');
