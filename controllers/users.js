@@ -7,6 +7,9 @@ const {
     } = require('../models/users');
 
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const dotenv = require('dotenv').config();
 
 const allUsers = ( req,res ) =>{
     const details = getAllUsers();
@@ -79,10 +82,19 @@ const deleteUser = (req, res) =>{
 }
 
 
+const loginUser = (req, res) =>{
+    const username = req.body.username;
+    const user = {name: username};
+
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN);
+    res.json({accessToken: accessToken});
+}
+
 module.exports = { 
     allUsers,
     allUsersById,
     postUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
  };

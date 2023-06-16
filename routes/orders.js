@@ -2,7 +2,8 @@ const router = require('express').Router();
 const { 
     orderDetails,
     orderDetailsById,
-    deleteOrder
+    deleteOrder,
+    orderDetailsOfUser
 } = require('../controllers/orders')
 
 

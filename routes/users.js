@@ -4,10 +4,12 @@ const {
     allUsersById,
     postUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginUser
 } = require('../controllers/users');
 
 router.get('/', allUsers);
+router.post('/login',loginUser); 
 router.get('/:id', allUsersById);
 router.post('/', postUser);
 router.put('/:id', updateUser);
