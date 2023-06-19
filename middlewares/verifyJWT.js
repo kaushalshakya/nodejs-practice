@@ -9,6 +9,7 @@ const verifyJwt = (req, res, next) => {
         message: "You are not authorized"
       });
     }
+    console.log(authHeader);
     
     const token = authHeader.split(' ')[1];
     jwt.verify(

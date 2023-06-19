@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const verifyJwt = require('../middlewares/verifyJWT');
+
 
 const { 
     productDetails,
@@ -9,7 +9,7 @@ const {
     deleteProduct
 } = require('../controllers/products')
 
-router.get('/', verifyJwt, productDetails);
+router.get('/', productDetails);
 router.get('/:id', productDetailsById);
 router.post('/', postProduct);
 router.put('/:id', updateProduct);

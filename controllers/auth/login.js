@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const {
     loginUser,
     setRefreshToken
-} = require('../models/login');
+} = require('../../models/auth/login');
 
 const loginUserRequest = async(req,res) =>{
     const username = req.body.username;
@@ -35,8 +35,6 @@ const loginUserRequest = async(req,res) =>{
                 {expiresIn: "1d"}
             )
             setRefreshToken(payload.username, refreshToken);
-            console.log('accessToken: ' , accessToken);
-            console.log('refreshToken: ', refreshToken);
             res.status(200).json({
                 status: 200, 
                 message: "User available!",
