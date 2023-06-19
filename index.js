@@ -18,7 +18,8 @@ app.use('/api/v1/products', productRouter);
 const orderRouter = require('./routes/orders');
 app.use('/api/v1/orders', orderRouter);
 
-
+const loginRouter = require('./routes/login');
+app.use('/api/v1/login', loginRouter);
 
 app.listen(PORT, () =>{
     console.log(`Server is running on http://localhost:${PORT}`);
