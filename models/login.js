@@ -21,7 +21,7 @@ const setRefreshToken = async(username, refreshToken) =>{
     try{
         qb = await pool.get_connection();
         const response = await qb
-        .update('users', refreshToken, {'username': username});
+        .update('users', {refresh_token: refreshToken}, {'username': username});
         return response;
     }catch(err){
         console.log(err);

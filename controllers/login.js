@@ -23,7 +23,7 @@ const loginUserRequest = async(req,res) =>{
         const hashedPassword = details[0].password;
         const userAvailable = bcrypt.compareSync(payload.password, hashedPassword);
         if (userAvailable){
-            res.status(200).json({status: 200, message: "User available!"});
+           
             const accessToken = jwt.sign(
                 {"username": payload.username},
                 process.env.ACCESS_TOKEN_SECRET,
@@ -37,6 +37,12 @@ const loginUserRequest = async(req,res) =>{
             setRefreshToken(payload.username, refreshToken);
             console.log('accessToken: ' , accessToken);
             console.log('refreshToken: ', refreshToken);
+            res.status(200).json({
+                status: 200, 
+                message: "User available!",
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            });
         } else{
             res.status(400).json({status: 400, message: "Invalid credentials"});
         }
