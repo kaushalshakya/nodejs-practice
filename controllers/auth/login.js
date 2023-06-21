@@ -25,12 +25,18 @@ const loginUserRequest = async(req,res) =>{
         const userAvailable = bcrypt.compareSync(payload.password, hashedPassword);
         if (userAvailable){
             const accessToken = jwt.sign(
-                {"username": payload.username},
+                {
+                    "username": payload.username,
+                    "role": payload.role
+            },
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn: "5m"}
             )
             const refreshToken = jwt.sign(
-                {"username": payload.username},
+                {
+                    "username": payload.username,
+                    "role": payload.role
+                },
                 process.env.REFRESH_TOKEN_SECRET,
                 {expiresIn: "10m"}
             )
