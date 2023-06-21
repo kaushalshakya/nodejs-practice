@@ -75,7 +75,7 @@ const deleteUserDetails = async(id) =>{
         qb = await pool.get_connection();
         const response = await qb.delete('users', {'user_id': id});
         console.log('Query ran: ' + qb.last_query());
-        return response
+        return response;
     }catch(err){
         console.log(err);
     }finally{
