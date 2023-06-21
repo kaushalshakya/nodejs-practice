@@ -18,7 +18,8 @@ const loginUserRequest = async(req,res) =>{
     userDetails.then((details) =>{
         const payload = {
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            role: req.body.role
         }
         const hashedPassword = details[0].password;
         const userAvailable = bcrypt.compareSync(payload.password, hashedPassword);
