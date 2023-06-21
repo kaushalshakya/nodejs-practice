@@ -30,7 +30,24 @@ const setRefreshToken = async(username, refreshToken) =>{
     }
 }
 
+const getRefreshToken = async(username) =>{
+    try{
+        qb = await pool.get_connection();
+        const response = await qb
+        .select('refresh_token')
+        .where({'username = ': username})
+        .get('users');
+        console.log('Last query ran: ' + qb.last_query());
+        return response;
+    }catch(err){
+        console.log(err);
+    }finally{
+        qb.release();
+    }
+}
+
 module.exports = {
     loginUser,
-    setRefreshToken
+    setRefreshToken,
+    getRefreshToken
 };

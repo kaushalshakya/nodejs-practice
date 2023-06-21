@@ -23,16 +23,15 @@ const loginUserRequest = async(req,res) =>{
         const hashedPassword = details[0].password;
         const userAvailable = bcrypt.compareSync(payload.password, hashedPassword);
         if (userAvailable){
-           
             const accessToken = jwt.sign(
                 {"username": payload.username},
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: "10m"}
+                {expiresIn: "1m"}
             )
             const refreshToken = jwt.sign(
                 {"username": payload.username},
                 process.env.REFRESH_TOKEN_SECRET,
-                {expiresIn: "1d"}
+                {expiresIn: "10m"}
             )
             setRefreshToken(payload.username, refreshToken);
             res.status(200).json({
@@ -41,6 +40,7 @@ const loginUserRequest = async(req,res) =>{
                 accessToken: accessToken,
                 refreshToken: refreshToken
             });
+            return refreshToken;
         } else{
             res.status(400).json({status: 400, message: "Invalid credentials"});
         }
@@ -48,5 +48,7 @@ const loginUserRequest = async(req,res) =>{
         res.status(400).json({status: 404, message: err.message});
     })
 }
+
+
 
 module.exports = loginUserRequest;

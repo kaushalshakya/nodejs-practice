@@ -10,8 +10,13 @@ app.get('/', (req, res) =>{
     res.status(200).json({status: 200, message: "NodeJS Practice"});
 })
 
+
 const loginRouter = require('./routes/auth/login');
 app.use('/api/v1/login', loginRouter);
+
+const refreshRouter = require('./routes/refresh');
+app.use('/api/v1/refresh', refreshRouter);
+
 
 app.use(verifyJwt);
 const userRouter = require('./routes/users');
